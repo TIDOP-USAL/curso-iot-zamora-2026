@@ -1,0 +1,33 @@
+# MING test environment. Zamora IoT 2026
+version: "3"
+services:
+
+  influxdb:
+    image: docker.io/influxdb:2
+    container_name: influxdb
+    user: 0
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./volume/influxdb/:/var/lib/influxdb2
+
+  nodered:
+    image: docker.io/nodered/node-red:latest-22
+    container_name: nodered
+    user: 0
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./volume/nodered/data:/data
+
+  grafana:
+    image: docker.io/grafana/grafana:13.0
+    container_name: grafana
+    user: 0
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./volume/grafana/data:/var/lib/grafana
